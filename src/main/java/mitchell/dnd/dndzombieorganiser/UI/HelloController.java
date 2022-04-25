@@ -1,13 +1,15 @@
 package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import mitchell.dnd.dndzombieorganiser.Helper;
-import mitchell.dnd.dndzombieorganiser.data.Zombie;
+import mitchell.dnd.dndzombieorganiser.data.FileHandler;
+import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +46,8 @@ public class HelloController {
             columns.get(index).setEditable(sc.editable);
         }
 
-        ZombieTable.setItems(FXCollections.observableArrayList(
-                new ZombieWrapper(new Zombie(34,16)),
-                new ZombieWrapper(new Zombie(34, 16))
-        ));
+        FileHandler fileHandler = new FileHandler();
+        ZombieTable.setItems(FXCollections.observableList(fileHandler.loadSave("Test").getZombiesWithWrapper()));
         ZombieTable.getColumns().addAll(columns);
     }
 }

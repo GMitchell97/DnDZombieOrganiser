@@ -1,7 +1,7 @@
 package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.beans.property.SimpleStringProperty;
-import mitchell.dnd.dndzombieorganiser.data.Zombie;
+import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
 
 public class ZombieWrapper {
 
@@ -9,21 +9,21 @@ public class ZombieWrapper {
     private SimpleStringProperty AC;
     private SimpleStringProperty HP;
 
-    private final Zombie zombie;
+    private final ZombieDTO zombie;
 
-    public ZombieWrapper(Zombie z) {
+    public ZombieWrapper(ZombieDTO z) {
         zombie = z;
         loadVariables();
     }
 
     private void loadVariables() {
-        Name = new SimpleStringProperty("Zombie");
+        Name = new SimpleStringProperty(getName());
         AC = new SimpleStringProperty(getAC());
         HP = new SimpleStringProperty(getHP());
     }
 
     public String getAC() {
-        return Integer.toString(zombie.getAC());
+        return zombie.getAc();
     }
 
     public SimpleStringProperty ACProperty() {
@@ -31,11 +31,11 @@ public class ZombieWrapper {
     }
 
     public void setAC(String AC) {
-        zombie.setAC(Integer.parseInt(AC));
+        zombie.setAc(AC);
     }
 
     public String getHP() {
-        return Integer.toString(zombie.getHP());
+        return zombie.getHp();
     }
 
     public SimpleStringProperty HPProperty() {
@@ -43,11 +43,11 @@ public class ZombieWrapper {
     }
 
     public void setHP(String HP) {
-        zombie.setHP(Integer.parseInt(HP));
+        zombie.setHp(HP);
     }
 
     public String getName() {
-        return Name.get();
+        return zombie.getName();
     }
 
     public SimpleStringProperty nameProperty() {
@@ -55,6 +55,6 @@ public class ZombieWrapper {
     }
 
     public void setName(String name) {
-        this.Name.set(name);
+        zombie.setName(name);
     }
 }

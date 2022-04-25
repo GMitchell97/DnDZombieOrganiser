@@ -1,20 +1,20 @@
 package mitchell.dnd.dndzombieorganiser;
 
-import mitchell.dnd.dndzombieorganiser.data.Data;
-import mitchell.dnd.dndzombieorganiser.data.Zombie;
+import mitchell.dnd.dndzombieorganiser.data.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
 
 import java.util.List;
 
 public class Helper {
 
-    private Data data;
+    private DataDTO dataDTO;
 
-    public Helper(Data data) {
-        this.data = data;
+    public Helper(DataDTO dataDTO) {
+        this.dataDTO = dataDTO;
     }
 
-    public List<Zombie> getZombieList() {
-        return data.getZombieList();
+    public List<ZombieDTO> getZombieList() {
+        return dataDTO.getZombies();
     }
 
 }
