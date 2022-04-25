@@ -3,21 +3,27 @@ package mitchell.dnd.dndzombieorganiser;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class ZombieData {
+public class ZombieWrapper {
 
-    private final SimpleStringProperty Name;
-    private final SimpleStringProperty AC;
-    private final SimpleStringProperty HP;
+    private SimpleStringProperty Name;
+    private SimpleStringProperty AC;
+    private SimpleStringProperty HP;
 
-    public ZombieData(String name, String hp, String ac) {
-        Name = new SimpleStringProperty(name);
-        AC = new SimpleStringProperty(ac);
-        HP = new SimpleStringProperty(hp);
+    private final Zombie zombie;
 
+    public ZombieWrapper(Zombie z) {
+        zombie = z;
+        loadVariables();
+    }
+
+    private void loadVariables() {
+        Name = new SimpleStringProperty("Zombie");
+        AC = new SimpleStringProperty(getAC());
+        HP = new SimpleStringProperty(getHP());
     }
 
     public String getAC() {
-        return AC.get();
+        return Integer.toString(zombie.getAC());
     }
 
     public SimpleStringProperty ACProperty() {
@@ -25,11 +31,11 @@ public class ZombieData {
     }
 
     public void setAC(String AC) {
-        this.AC.set(AC);
+        zombie.setAC(Integer.parseInt(AC));
     }
 
     public String getHP() {
-        return HP.get();
+        return Integer.toString(zombie.getHP());
     }
 
     public SimpleStringProperty HPProperty() {
@@ -37,7 +43,7 @@ public class ZombieData {
     }
 
     public void setHP(String HP) {
-        this.HP.set(HP);
+        zombie.setHP(Integer.parseInt(HP));
     }
 
     public String getName() {

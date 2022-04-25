@@ -3,11 +3,11 @@ package mitchell.dnd.dndzombieorganiser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller {
+public class Helper {
 
     private Data data;
 
-    public Controller(Data data) {
+    public Helper(Data data) {
         this.data = data;
     }
 
