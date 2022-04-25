@@ -1,9 +1,8 @@
-package mitchell.dnd.dndzombieorganiser;
+package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.TableColumn;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

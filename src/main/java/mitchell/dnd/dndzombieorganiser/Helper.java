@@ -1,6 +1,8 @@
 package mitchell.dnd.dndzombieorganiser;
 
-import java.util.ArrayList;
+import mitchell.dnd.dndzombieorganiser.data.Data;
+import mitchell.dnd.dndzombieorganiser.data.Zombie;
+
 import java.util.List;
 
 public class Helper {
@@ -12,7 +14,7 @@ public class Helper {
     }
 
     public List<Zombie> getZombieList() {
-        return data.zombieList;
+        return data.getZombieList();
     }
 
 }

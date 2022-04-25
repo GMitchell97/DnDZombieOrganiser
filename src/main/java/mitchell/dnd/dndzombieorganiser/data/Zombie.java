@@ -1,4 +1,4 @@
-package mitchell.dnd.dndzombieorganiser;
+package mitchell.dnd.dndzombieorganiser.data;
 
 import java.util.ArrayList;
 import java.util.List;

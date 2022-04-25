@@ -1,4 +1,4 @@
-package mitchell.dnd.dndzombieorganiser;
+package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

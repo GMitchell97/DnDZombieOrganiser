@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                mitchell.dnd.dndzombieorganiser/mitchell.dnd.dndzombieorganiser.HelloApplication
+                                mitchell.dnd.dndzombieorganiser/mitchell.dnd.dndzombieorganiser.UI.HelloApplication
                             </mainClass>
                         </configuration>
                     </execution>

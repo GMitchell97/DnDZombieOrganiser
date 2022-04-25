@@ -1,12 +1,13 @@
-package mitchell.dnd.dndzombieorganiser;
+package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import mitchell.dnd.dndzombieorganiser.Helper;
+import mitchell.dnd.dndzombieorganiser.data.Zombie;
 
 import java.util.ArrayList;
 import java.util.List;
