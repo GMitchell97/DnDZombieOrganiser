@@ -1,22 +1,25 @@
 package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
 import mitchell.dnd.dndzombieorganiser.Helper;
+import mitchell.dnd.dndzombieorganiser.data.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.FileHandler;
-import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelloController {
 
     Helper helper;
+    DataDTO data;
+    FileHandler fileHandler = new FileHandler();
 
     @FXML
     private TableView<ZombieWrapper> ZombieTable;
@@ -24,11 +27,11 @@ public class HelloController {
     @FXML
     public void initialize() {
 
-        LoadZombieTable();
+        loadZombieTable();
     }
 
     @FXML
-    protected void LoadZombieTable() {
+    protected void loadZombieTable() {
 
         ZombieTable.setEditable(true);
         ZombieTableSchema schema = new ZombieTableSchema();
@@ -46,8 +49,32 @@ public class HelloController {
             columns.get(index).setEditable(sc.editable);
         }
 
-        FileHandler fileHandler = new FileHandler();
-        ZombieTable.setItems(FXCollections.observableList(fileHandler.loadSave("Test").getZombiesWithWrapper()));
+        if (data != null) {
+            ZombieTable.setItems(FXCollections.observableList(data.getZombiesWithWrapper()));
+        }
         ZombieTable.getColumns().addAll(columns);
+    }
+
+    @FXML
+    protected void openSaveClick() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Save Files", "*.json")
+        );
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            data = fileHandler.loadSave(file.getPath(),"");
+            loadZombieTable();
+        }
+    }
+
+    @FXML
+    protected void saveSaveClick() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Save Files", ".json")
+        );
+        File file = fileChooser.showSaveDialog(null);
     }
 }

@@ -27,7 +27,7 @@ public class DataDTO {
 
     @JsonProperty("Zombies")
     public List<ZombieDTO> getZombies() {
-        return zombies;
+            return zombies != null ? zombies : new ArrayList<ZombieDTO>();
     }
 
     public List<ZombieWrapper> getZombiesWithWrapper() {
