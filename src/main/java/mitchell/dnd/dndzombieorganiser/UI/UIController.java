@@ -7,6 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import mitchell.dnd.dndzombieorganiser.Helper;
 import mitchell.dnd.dndzombieorganiser.data.Config;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
@@ -55,6 +56,7 @@ public class UIController {
             columns.get(index).setEditable(sc.editable);
         }
 
+        ZombieTable.getItems().clear();
         if (data != null) {
             ZombieTable.setItems(FXCollections.observableList(data.getZombiesWithWrapper()));
         }
@@ -87,5 +89,17 @@ public class UIController {
         if (file != null && data != null) {
             fileHandler.saveSave(file.toPath(), data);
         }
+    }
+
+    @FXML
+    protected void newSaveClick() {
+        config.saveSavePath("");
+        data = null;
+        loadZombieTable();
+    }
+
+    @FXML
+    protected void close() {
+        ((Stage)ZombieTable.getScene().getWindow()).close();
     }
 }

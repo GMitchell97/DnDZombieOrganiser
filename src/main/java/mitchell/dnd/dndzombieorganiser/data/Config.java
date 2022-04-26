@@ -22,8 +22,8 @@ public class Config {
         return Paths.get(path);
     }
 
-    public void saveSavePath(Path savePath) {
-        config.setProperty("savePath", savePath.toString());
+    public void saveSavePath(String savePath) {
+        config.setProperty("savePath", savePath);
         try {
             config.store(new FileOutputStream(Config.class.getResource("config.properties").getPath()),"Set save path: " + savePath.toString());
         } catch (IOException e) {
@@ -31,7 +31,11 @@ public class Config {
         }
     }
 
+    public void saveSavePath(Path savePath) {
+        saveSavePath(savePath.toString());
+    }
+
     public void setDefaults() {
-        config.setProperty("savePath", "");
+        saveSavePath("");
     }
 }
