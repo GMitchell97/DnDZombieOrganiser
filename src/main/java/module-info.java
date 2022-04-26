@@ -3,6 +3,7 @@ module mitchell.dnd.dndzombieorganiser {
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
     requires java.annotation;
+    requires java.net.http;
 
 
     opens mitchell.dnd.dndzombieorganiser to javafx.fxml;

@@ -2,22 +2,26 @@ package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import mitchell.dnd.dndzombieorganiser.Helper;
 import mitchell.dnd.dndzombieorganiser.data.Config;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.FileHandler;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UIController {
+public class UIMainController {
 
     Config config;
     DataDTO data;
@@ -101,5 +105,18 @@ public class UIController {
     @FXML
     protected void close() {
         ((Stage)ZombieTable.getScene().getWindow()).close();
+    }
+
+    @FXML
+    protected void addZombie() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ZOGApplication.class.getResource("AddZombie.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
+        ((UIAddZombieController)fxmlLoader.getController()).setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        loadZombieTable();
     }
 }

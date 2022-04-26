@@ -28,8 +28,81 @@ public class ZombieDTO {
     private String hp;
     @JsonProperty("AC")
     private String ac;
+    @JsonProperty("strength")
+    private String strength;
+    @JsonProperty("dexterity")
+    private String dexterity;
+    @JsonProperty("constitution")
+    private String constitution;
+    @JsonProperty("intelligence")
+    private String intelligence;
+    @JsonProperty("wisdom")
+    private String wisdom;
+    @JsonProperty("charisma")
+    private String charisma;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("strength")
+    public String getStrength() {
+        return strength;
+    }
+
+    @JsonProperty("strength")
+    public void setStrength(String strength) {
+        this.strength = strength;
+    }
+
+    @JsonProperty("dexterity")
+    public String getDexterity() {
+        return dexterity;
+    }
+
+    @JsonProperty("dexterity")
+    public void setDexterity(String dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    @JsonProperty("constitution")
+    public String getConstitution() {
+        return constitution;
+    }
+
+    @JsonProperty("constitution")
+    public void setConstitution(String constitution) {
+        this.constitution = constitution;
+    }
+
+    @JsonProperty("intelligence")
+    public String getIntelligence() {
+        return intelligence;
+    }
+
+    @JsonProperty("intelligence")
+    public void setIntelligence(String intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    @JsonProperty("wisdom")
+    public String getWisdom() {
+        return wisdom;
+    }
+
+    @JsonProperty("wisdom")
+    public void setWisdom(String wisdom) {
+        this.wisdom = wisdom;
+    }
+
+    @JsonProperty("charisma")
+    public String getCharisma() {
+        return charisma;
+    }
+
+    @JsonProperty("charisma")
+    public void setCharisma(String charisma) {
+        this.charisma = charisma;
+    }
 
     @JsonProperty("ID")
     public String getId() {
