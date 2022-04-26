@@ -27,9 +27,13 @@ public class DataDTO {
 
     @JsonProperty("Zombies")
     public List<ZombieDTO> getZombies() {
-            return zombies != null ? zombies : new ArrayList<ZombieDTO>();
+            if (zombies == null) {
+                zombies = new ArrayList<>();
+            }
+            return zombies;
     }
 
+    @JsonIgnore
     public List<ZombieWrapper> getZombiesWithWrapper() {
         return new ArrayList<ZombieWrapper>(getZombies().stream().map(z -> new ZombieWrapper(z)).toList());
     }

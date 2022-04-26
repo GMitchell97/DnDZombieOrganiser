@@ -3,14 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mitchell.dnd.dndzombieorganiser.UI.HelloController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mitchell.dnd.dndzombieorganiser.UI.UIController">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="OpenSave" mnemonicParsing="false" onAction="#openSaveClick" text="Open" />
-                  <MenuItem fx:id="saveSave" mnemonicParsing="false" onAction="#saveSaveClick" text="Open" />
+                  <MenuItem fx:id="saveSave" mnemonicParsing="false" onAction="#saveSaveClick" text="Save" />
                   <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
@@ -38,7 +38,7 @@
          <children>
             <ScrollPane GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                <content>
-                  <TableView fx:id="ZombieTable" prefHeight="200.0" prefWidth="200.0" />
+                  <TableView fx:id="ZombieTable" prefHeight="511.0" prefWidth="864.0" />
                </content></ScrollPane>
          </children>
       </GridPane>
