@@ -18,6 +18,11 @@ public class FileHandler {
 
     private final String PATH = "res/saves/";
 
+
+    public DataDTO loadSave(Path savePath) {
+        return loadSave(savePath.toString(),"");
+    }
+
     public DataDTO loadSave(String saveName) {
         return loadSave(PATH, saveName);
     }
@@ -35,13 +40,17 @@ public class FileHandler {
         return json;
     }
 
-    public void Save(String saveName, DataDTO dataDTO) {
-        Save(PATH, saveName, dataDTO);
+    public void saveSave(Path path, DataDTO dataDTO) {
+        saveSave(path.getParent().toString(), path.getFileName().toString(), dataDTO);
     }
 
-    public void Save(String path, String saveName, DataDTO dataDTO) {
+    public void saveSave(String saveName, DataDTO dataDTO) {
+        saveSave(PATH, saveName, dataDTO);
+    }
+
+    public void saveSave(String path, String saveName, DataDTO dataDTO) {
         ObjectWriter writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String fileName = path + saveName;
+        String fileName = path + "\\" + saveName;
 
         try {
             if (!Files.exists(Paths.get(fileName))) {
@@ -58,5 +67,4 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
-
 }

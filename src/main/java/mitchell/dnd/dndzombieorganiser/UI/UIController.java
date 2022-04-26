@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import mitchell.dnd.dndzombieorganiser.Helper;
+import mitchell.dnd.dndzombieorganiser.data.Config;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.FileHandler;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class UIController {
 
-    Helper helper;
+    Config config;
     DataDTO data;
     FileHandler fileHandler = new FileHandler();
 
@@ -27,11 +28,16 @@ public class UIController {
     @FXML
     public void initialize() {
 
+        config = new Config();
         loadZombieTable();
     }
 
     @FXML
     protected void loadZombieTable() {
+
+        if (!config.getSavePath().toString().equals("")) {
+            data = fileHandler.loadSave(config.getSavePath());
+        }
 
         ZombieTable.setEditable(true);
         ZombieTableSchema schema = new ZombieTableSchema();
@@ -52,6 +58,7 @@ public class UIController {
         if (data != null) {
             ZombieTable.setItems(FXCollections.observableList(data.getZombiesWithWrapper()));
         }
+        ZombieTable.getColumns().clear();
         ZombieTable.getColumns().addAll(columns);
     }
 
@@ -64,7 +71,7 @@ public class UIController {
         File file = fileChooser.showOpenDialog(null);
 
         if (file != null) {
-            data = fileHandler.loadSave(file.getPath(),"");
+            config.saveSavePath(file.toPath());
             loadZombieTable();
         }
     }
@@ -73,8 +80,12 @@ public class UIController {
     protected void saveSaveClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Save Files", ".json")
+                new FileChooser.ExtensionFilter("Save Files", "*.json")
         );
         File file = fileChooser.showSaveDialog(null);
+
+        if (file != null && data != null) {
+            fileHandler.saveSave(file.toPath(), data);
+        }
     }
 }

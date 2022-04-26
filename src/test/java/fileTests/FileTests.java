@@ -37,7 +37,7 @@ public class FileTests {
         dataDTO.getZombies().get(0).setHp("30");
         dataDTO.getZombies().get(0).setAc("12");
 
-        handler.Save("Test1.json", dataDTO);
+        handler.saveSave("Test1.json", dataDTO);
         DataDTO testDTO = handler.loadSave("Test1.json");
 
         Assertions.assertEquals(1, testDTO.getZombies().size());
@@ -61,7 +61,7 @@ public class FileTests {
         dataDTO.getZombies().get(1).setHp("20");
         dataDTO.getZombies().get(1).setAc("16");
 
-        handler.Save("Test1.json", dataDTO);
+        handler.saveSave("Test1.json", dataDTO);
         DataDTO testDTO = handler.loadSave("Test1.json");
 
         Assertions.assertEquals(2, testDTO.getZombies().size());
