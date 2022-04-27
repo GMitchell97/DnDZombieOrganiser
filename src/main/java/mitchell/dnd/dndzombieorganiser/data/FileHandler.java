@@ -59,6 +59,7 @@ public class FileHandler {
                 }
                 Files.createFile(Paths.get(fileName));
             }
+            dataDTO.saveRollHistory();
             String json = writer.writeValueAsString(dataDTO);
             FileWriter save = new FileWriter(fileName);
             save.write(json);
