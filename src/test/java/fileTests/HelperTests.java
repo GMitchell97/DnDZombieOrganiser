@@ -1,21 +1,18 @@
 package fileTests;
 
-import com.fasterxml.jackson.core.TreeCodec;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mitchell.dnd.dndzombieorganiser.Helper;
+import mitchell.dnd.dndzombieorganiser.core.Helper;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 
-import static mitchell.dnd.dndzombieorganiser.Helper.*;
+import static mitchell.dnd.dndzombieorganiser.core.Helper.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HelperTests {

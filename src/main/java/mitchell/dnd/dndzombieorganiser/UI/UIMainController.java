@@ -10,8 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import mitchell.dnd.dndzombieorganiser.Helper;
 import mitchell.dnd.dndzombieorganiser.data.Config;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.FileHandler;
@@ -34,15 +32,12 @@ public class UIMainController {
     public void initialize() {
 
         config = new Config();
+        loadData();
         loadZombieTable();
     }
 
     @FXML
     protected void loadZombieTable() {
-
-        if (!config.getSavePath().toString().equals("")) {
-            data = fileHandler.loadSave(config.getSavePath());
-        }
 
         ZombieTable.setEditable(true);
         ZombieTableSchema schema = new ZombieTableSchema();
@@ -60,12 +55,24 @@ public class UIMainController {
             columns.get(index).setEditable(sc.editable);
         }
 
+        loadTableData();
+        ZombieTable.getColumns().clear();
+        ZombieTable.getColumns().addAll(columns);
+    }
+
+    private void loadData() {
+        if (!config.getSavePath().toString().equals("")) {
+            data = fileHandler.loadSave(config.getSavePath());
+        } else {
+            data = new DataDTO();
+        }
+    }
+
+    private void loadTableData() {
         ZombieTable.getItems().clear();
         if (data != null) {
             ZombieTable.setItems(FXCollections.observableList(data.getZombiesWithWrapper()));
         }
-        ZombieTable.getColumns().clear();
-        ZombieTable.getColumns().addAll(columns);
     }
 
     @FXML
@@ -78,6 +85,7 @@ public class UIMainController {
 
         if (file != null) {
             config.saveSavePath(file.toPath());
+            loadData();
             loadZombieTable();
         }
     }
@@ -98,7 +106,7 @@ public class UIMainController {
     @FXML
     protected void newSaveClick() {
         config.saveSavePath("");
-        data = null;
+        loadData();
         loadZombieTable();
     }
 
@@ -117,6 +125,6 @@ public class UIMainController {
         stage.setScene(scene);
         stage.showAndWait();
 
-        loadZombieTable();
+        loadTableData();
     }
 }

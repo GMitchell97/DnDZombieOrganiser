@@ -15,10 +15,14 @@ import mitchell.dnd.dndzombieorganiser.UI.ZombieWrapper;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "NextID",
         "Zombies"
 })
 @Generated("jsonschema2pojo")
 public class DataDTO {
+
+    @JsonProperty("NextID")
+    private int nextID;
 
     @JsonProperty("Zombies")
     private List<ZombieDTO> zombies = null;
@@ -31,6 +35,12 @@ public class DataDTO {
                 zombies = new ArrayList<>();
             }
             return zombies;
+    }
+
+    public void addZombie(ZombieDTO zombie) {
+        zombie.setId(Integer.toString(nextID));
+        nextID++;
+        getZombies().add(zombie);
     }
 
     @JsonIgnore

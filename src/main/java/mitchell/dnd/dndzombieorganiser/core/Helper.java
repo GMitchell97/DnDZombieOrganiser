@@ -1,7 +1,8 @@
-package mitchell.dnd.dndzombieorganiser;
+package mitchell.dnd.dndzombieorganiser.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.api.APIConnectionManager;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
@@ -48,7 +49,7 @@ public class Helper {
         newZombie.setWisdom(typeJson.get("wisdom").toString());
         newZombie.setCharisma(typeJson.get("charisma").toString());
 
-        data.getZombies().add(newZombie);
+        data.addZombie(newZombie);
     }
 
 }
