@@ -25,18 +25,26 @@
             <artifactId>javafx-fxml</artifactId>
             <version>16</version>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.12.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.5</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
         </dependency>
     </dependencies>
 
@@ -61,7 +69,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                mitchell.dnd.dndzombieorganiser/mitchell.dnd.dndzombieorganiser.HelloApplication
+                                mitchell.dnd.dndzombieorganiser/mitchell.dnd.dndzombieorganiser.UI.ZOGApplication
                             </mainClass>
                         </configuration>
                     </execution>
