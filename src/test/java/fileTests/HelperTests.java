@@ -2,9 +2,12 @@ package fileTests;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.core.Helper;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.RaceDTO;
+import mitchell.dnd.dndzombieorganiser.data.Rules;
 import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -51,7 +54,7 @@ public class HelperTests {
         ObjectMapper mapper = new ObjectMapper();
         DataDTO data = new DataDTO();
 
-        CallManager callMan = getCreatureType("guard");
+        CallManager callMan = getCreatureType("bandit");
         JsonNode typeJson = mapper.readTree(callMan.getJson());
         callMan = getCreatureRace("Human");
         JsonNode raceJson = mapper.readTree(callMan.getJson());
@@ -59,6 +62,35 @@ public class HelperTests {
 
         ZombieDTO zombie = data.getZombies().get(0);
 
-        assertEquals("13", zombie.getStrength());
+        assertEquals("13", zombie.getStrength(), "Strength was: " + zombie.getStrength());
+        assertEquals("6", zombie.getDexterity(), "Dexterity was: " + zombie.getDexterity());
+        assertEquals("16", zombie.getConstitution(), "Constitution was: " + zombie.getConstitution());
+        assertEquals("3", zombie.getIntelligence(), "Intelligence was: " + zombie.getIntelligence());
+        assertEquals("6", zombie.getWisdom(), "Wisdom was: " + zombie.getWisdom());
+        assertEquals("5", zombie.getCharisma(), "Charisma was: " + zombie.getCharisma());
+    }
+
+    @Test
+    public void raceDTOReturnsAbilityBonus() throws IOException, InterruptedException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        CallManager callMan = getCreatureRace("Human");
+        JsonNode raceJson = mapper.readTree(callMan.getJson());
+
+        RaceDTO raceDTO = new RaceDTO(raceJson);
+
+        assertEquals(1, raceDTO.getAbilityScoreBonus(Rules.ability.strength));
+    }
+
+    @Test
+    public void negativeRaceDTOReturnsAbilityBonus() throws IOException, InterruptedException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        CallManager callMan = getCreatureRace("elf");
+        JsonNode raceJson = mapper.readTree(callMan.getJson());
+
+        RaceDTO raceDTO = new RaceDTO(raceJson);
+
+        assertEquals(0, raceDTO.getAbilityScoreBonus(Rules.ability.intelligence));
     }
 }

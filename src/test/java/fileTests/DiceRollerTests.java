@@ -44,7 +44,7 @@ public class DiceRollerTests {
         assertEquals(2.5, diceRoller.averageRoll(4));
     }
 
-    @Test
+//    @Test
     public void averageDiceRolls() {
         for (int i = 0; i < 10000; i++) {
             diceRoller.rollDice(4);
