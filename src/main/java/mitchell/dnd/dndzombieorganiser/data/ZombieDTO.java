@@ -1,6 +1,8 @@
 package mitchell.dnd.dndzombieorganiser.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -28,80 +30,23 @@ public class ZombieDTO {
     private String hp;
     @JsonProperty("AC")
     private String ac;
-    @JsonProperty("strength")
-    private String strength;
-    @JsonProperty("dexterity")
-    private String dexterity;
-    @JsonProperty("constitution")
-    private String constitution;
-    @JsonProperty("intelligence")
-    private String intelligence;
-    @JsonProperty("wisdom")
-    private String wisdom;
-    @JsonProperty("charisma")
-    private String charisma;
+    @JsonProperty("Ability_Scores")
+    private List<Ability> abilityScores;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("strength")
-    public String getStrength() {
-        return strength;
+    @JsonProperty("Ability_Scores")
+    public List<Ability> getAbilityScores() {
+        if (abilityScores == null) {
+            abilityScores = new ArrayList<>();
+        }
+        return abilityScores;
     }
 
-    @JsonProperty("strength")
-    public void setStrength(String strength) {
-        this.strength = strength;
-    }
-
-    @JsonProperty("dexterity")
-    public String getDexterity() {
-        return dexterity;
-    }
-
-    @JsonProperty("dexterity")
-    public void setDexterity(String dexterity) {
-        this.dexterity = dexterity;
-    }
-
-    @JsonProperty("constitution")
-    public String getConstitution() {
-        return constitution;
-    }
-
-    @JsonProperty("constitution")
-    public void setConstitution(String constitution) {
-        this.constitution = constitution;
-    }
-
-    @JsonProperty("intelligence")
-    public String getIntelligence() {
-        return intelligence;
-    }
-
-    @JsonProperty("intelligence")
-    public void setIntelligence(String intelligence) {
-        this.intelligence = intelligence;
-    }
-
-    @JsonProperty("wisdom")
-    public String getWisdom() {
-        return wisdom;
-    }
-
-    @JsonProperty("wisdom")
-    public void setWisdom(String wisdom) {
-        this.wisdom = wisdom;
-    }
-
-    @JsonProperty("charisma")
-    public String getCharisma() {
-        return charisma;
-    }
-
-    @JsonProperty("charisma")
-    public void setCharisma(String charisma) {
-        this.charisma = charisma;
+    @JsonProperty("Ability_Scores")
+    public void setAbilityScores(List<Ability> abilityScores) {
+        this.abilityScores = abilityScores;
     }
 
     @JsonProperty("ID")

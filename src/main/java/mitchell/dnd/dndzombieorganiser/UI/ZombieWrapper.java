@@ -2,6 +2,7 @@ package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.beans.property.SimpleStringProperty;
 import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.Ability;
 
 public class ZombieWrapper {
 
@@ -85,7 +86,7 @@ public class ZombieWrapper {
     }
 
     public String getStrength() {
-        return zombie.getStrength();
+        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("strength")).mapToInt(Ability::getValue).findFirst().orElse(0));
     }
 
     public SimpleStringProperty strengthProperty() {
@@ -93,11 +94,11 @@ public class ZombieWrapper {
     }
 
     public void setStrength(String strength) {
-        zombie.setStrength(strength);
+        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("strength")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(strength)));
     }
 
     public String getDexterity() {
-        return zombie.getDexterity();
+        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("dexterity")).mapToInt(Ability::getValue).findFirst().orElse(0));
     }
 
     public SimpleStringProperty dexterityProperty() {
@@ -105,11 +106,11 @@ public class ZombieWrapper {
     }
 
     public void setDexterity(String dexterity) {
-        zombie.setDexterity(dexterity);
+        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("dexterity")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(dexterity)));
     }
 
     public String getConstitution() {
-        return zombie.getConstitution();
+        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("constitution")).mapToInt(Ability::getValue).findFirst().orElse(0));
     }
 
     public SimpleStringProperty constitutionProperty() {
@@ -117,11 +118,11 @@ public class ZombieWrapper {
     }
 
     public void setConstitution(String constitution) {
-        zombie.setConstitution(constitution);
+        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("constitution")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(constitution)));
     }
 
     public String getIntelligence() {
-        return zombie.getIntelligence();
+        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("intelligence")).mapToInt(Ability::getValue).findFirst().orElse(0));
     }
 
     public SimpleStringProperty intelligenceProperty() {
@@ -129,11 +130,11 @@ public class ZombieWrapper {
     }
 
     public void setIntelligence(String intelligence) {
-        zombie.setIntelligence(intelligence);
+        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("intelligence")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(intelligence)));
     }
 
     public String getWisdom() {
-        return zombie.getWisdom();
+        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("wisdom")).mapToInt(Ability::getValue).findFirst().orElse(0));
     }
 
     public SimpleStringProperty wisdomProperty() {
@@ -141,11 +142,11 @@ public class ZombieWrapper {
     }
 
     public void setWisdom(String wisdom) {
-        zombie.setWisdom(wisdom);
+        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("wisdom")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(wisdom)));
     }
 
     public String getCharisma() {
-        return zombie.getCharisma();
+        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("charisma")).mapToInt(Ability::getValue).findFirst().orElse(0));
     }
 
     public SimpleStringProperty charismaProperty() {
@@ -153,6 +154,6 @@ public class ZombieWrapper {
     }
 
     public void setCharisma(String charisma) {
-        zombie.setCharisma(charisma);
+        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("charisma")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(charisma)));
     }
 }

@@ -2,18 +2,19 @@ package fileTests;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.core.Helper;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.RaceDTO;
 import mitchell.dnd.dndzombieorganiser.data.Rules;
 import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.Ability;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
+import java.util.Map;
 
 import static mitchell.dnd.dndzombieorganiser.core.Helper.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,12 +63,20 @@ public class HelperTests {
 
         ZombieDTO zombie = data.getZombies().get(0);
 
-        assertEquals("13", zombie.getStrength(), "Strength was: " + zombie.getStrength());
-        assertEquals("6", zombie.getDexterity(), "Dexterity was: " + zombie.getDexterity());
-        assertEquals("16", zombie.getConstitution(), "Constitution was: " + zombie.getConstitution());
-        assertEquals("3", zombie.getIntelligence(), "Intelligence was: " + zombie.getIntelligence());
-        assertEquals("6", zombie.getWisdom(), "Wisdom was: " + zombie.getWisdom());
-        assertEquals("5", zombie.getCharisma(), "Charisma was: " + zombie.getCharisma());
+        Map<String, Integer> exp = Map.of(
+                "strength", 13,
+                "dexterity", 6,
+                "constitution", 16,
+                "intelligence", 3,
+                "wisdom", 6,
+                "charisma", 5
+        );
+
+        exp.forEach((n, v) ->
+                assertEquals(v.intValue(),
+                        zombie.getAbilityScores().stream().filter(a -> a.getName().equals(n)).mapToInt(Ability::getValue).findFirst().orElse(0),
+                        n + " was: " + zombie.getAbilityScores().stream().filter(a -> a.getName().equals(n)).mapToInt(Ability::getValue).findFirst().orElse(0))
+        );
     }
 
     @Test
