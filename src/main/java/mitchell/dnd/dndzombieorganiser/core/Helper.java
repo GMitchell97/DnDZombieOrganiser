@@ -49,6 +49,7 @@ public class Helper {
                 newZombie.getAbilityScores().add(new Ability(a.toString(), calculateAbilityScore(calculateCurrentAbilityScore(a, raceDTO, typeJson), Rules.creature.zombie, a)))
         );
 
+        calculateHealth(newZombie, data);
         data.addZombie(newZombie);
     }
 
@@ -67,13 +68,12 @@ public class Helper {
         }
     }
 
-    public static int calculateHealth(ZombieDTO zombieDTO) {
-        DiceRoller dice = new DiceRoller();
-
+    public static void calculateHealth(ZombieDTO zombieDTO, DataDTO dataDTO) {
         int health = 0;
         for (int i = 0; i < 3; i++) {
-            health += dice.rollDice(8);
+            health += dataDTO.getDiceRoller().rollDice(8);
+            health += zombieDTO.getAbilityScore("constitution");
         }
-        return health;
+        zombieDTO.setHp(Integer.toString(health));
     }
 }

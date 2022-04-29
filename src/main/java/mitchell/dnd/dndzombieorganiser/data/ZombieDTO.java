@@ -1,9 +1,6 @@
 package mitchell.dnd.dndzombieorganiser.data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -47,6 +44,23 @@ public class ZombieDTO {
     @JsonProperty("Ability_Scores")
     public void setAbilityScores(List<Ability> abilityScores) {
         this.abilityScores = abilityScores;
+    }
+
+    @JsonIgnore
+    public int getAbilityScore(String ability) {
+        return getAbilityScores().stream().filter(a -> a.getName().equals(ability)).mapToInt(Ability::getValue).findFirst().orElse(0);
+    }
+
+    @JsonIgnore
+    public void setAbilityScore(String ability, int score) {
+        getAbilityScores().stream().filter(a -> a.getName().equals(ability)).findFirst().ifPresentOrElse(a -> a.setValue(score), new Runnable() {
+            @Override
+            public void run() {
+                if (Arrays.stream(Rules.ability.values()).map(Enum::name).toList().contains(ability)) {
+                    getAbilityScores().add(new Ability(ability, score));
+                }
+            }
+        });
     }
 
     @JsonProperty("ID")

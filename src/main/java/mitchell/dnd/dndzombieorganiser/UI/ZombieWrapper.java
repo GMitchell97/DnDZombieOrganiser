@@ -86,7 +86,7 @@ public class ZombieWrapper {
     }
 
     public String getStrength() {
-        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("strength")).mapToInt(Ability::getValue).findFirst().orElse(0));
+        return Integer.toString(zombie.getAbilityScore("strength"));
     }
 
     public SimpleStringProperty strengthProperty() {
@@ -94,11 +94,11 @@ public class ZombieWrapper {
     }
 
     public void setStrength(String strength) {
-        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("strength")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(strength)));
+        zombie.setAbilityScore("strength", Integer.parseInt(strength));
     }
 
     public String getDexterity() {
-        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("dexterity")).mapToInt(Ability::getValue).findFirst().orElse(0));
+        return Integer.toString(zombie.getAbilityScore("dexterity"));
     }
 
     public SimpleStringProperty dexterityProperty() {
@@ -106,11 +106,11 @@ public class ZombieWrapper {
     }
 
     public void setDexterity(String dexterity) {
-        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("dexterity")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(dexterity)));
+        zombie.setAbilityScore("dexterity", Integer.parseInt(dexterity));
     }
 
     public String getConstitution() {
-        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("constitution")).mapToInt(Ability::getValue).findFirst().orElse(0));
+        return Integer.toString(zombie.getAbilityScore("constitution"));
     }
 
     public SimpleStringProperty constitutionProperty() {
@@ -118,11 +118,11 @@ public class ZombieWrapper {
     }
 
     public void setConstitution(String constitution) {
-        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("constitution")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(constitution)));
+        zombie.setAbilityScore("constitution", Integer.parseInt(constitution));
     }
 
     public String getIntelligence() {
-        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("intelligence")).mapToInt(Ability::getValue).findFirst().orElse(0));
+        return Integer.toString(zombie.getAbilityScore("intelligence"));
     }
 
     public SimpleStringProperty intelligenceProperty() {
@@ -130,11 +130,11 @@ public class ZombieWrapper {
     }
 
     public void setIntelligence(String intelligence) {
-        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("intelligence")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(intelligence)));
+        zombie.setAbilityScore("intelligence", Integer.parseInt(intelligence));
     }
 
     public String getWisdom() {
-        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("wisdom")).mapToInt(Ability::getValue).findFirst().orElse(0));
+        return Integer.toString(zombie.getAbilityScore("wisdom"));
     }
 
     public SimpleStringProperty wisdomProperty() {
@@ -142,11 +142,11 @@ public class ZombieWrapper {
     }
 
     public void setWisdom(String wisdom) {
-        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("wisdom")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(wisdom)));
+        zombie.setAbilityScore("wisdom", Integer.parseInt(wisdom));
     }
 
     public String getCharisma() {
-        return Integer.toString(zombie.getAbilityScores().stream().filter(a -> a.getName().equals("charisma")).mapToInt(Ability::getValue).findFirst().orElse(0));
+        return Integer.toString(zombie.getAbilityScore("charisma"));
     }
 
     public SimpleStringProperty charismaProperty() {
@@ -154,6 +154,6 @@ public class ZombieWrapper {
     }
 
     public void setCharisma(String charisma) {
-        zombie.getAbilityScores().stream().filter(a -> a.getName().equals("charisma")).findFirst().ifPresent(ability -> ability.setValue(Integer.parseInt(charisma)));
+        zombie.setAbilityScore("charisma", Integer.parseInt(charisma));
     }
 }
