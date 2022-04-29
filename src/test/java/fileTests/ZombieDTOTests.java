@@ -1,9 +1,8 @@
 package fileTests;
 
 import mitchell.dnd.dndzombieorganiser.UI.ZombieWrapper;
-import mitchell.dnd.dndzombieorganiser.data.Ability;
-import mitchell.dnd.dndzombieorganiser.data.Rules;
-import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.core.Helper;
+import mitchell.dnd.dndzombieorganiser.data.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,5 +54,21 @@ public class ZombieDTOTests {
 
         assertEquals(0, zombie.getAbilityScores().size());
         assertEquals(0, zombie.getAbilityScore("strengsth"));
+    }
+
+    @Test
+    public void calculateHealthReturnsValid() {
+        Helper.calculateHealth(zombie, new DataDTO());
+        int value = Integer.parseInt(zombie.getHp());
+        assertTrue(1 <= value && value <= 33, "Value out of range of " + 33 + ": " + value );
+    }
+
+    @Test
+    public void calculateHealthReturnsCorrect() {
+        DataDTO data = new DataDTO();
+        zombie.setAbilityScore("constitution", 16);
+        Helper.calculateHealth(zombie, data);
+        int value = Integer.parseInt(zombie.getHp());
+        assertEquals(data.getDiceRoller().getHistory().stream().mapToInt(Pair::getB).sum() + 9, value);
     }
 }

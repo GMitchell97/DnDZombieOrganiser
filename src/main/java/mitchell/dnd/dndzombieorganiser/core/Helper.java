@@ -72,7 +72,7 @@ public class Helper {
         int health = 0;
         for (int i = 0; i < 3; i++) {
             health += dataDTO.getDiceRoller().rollDice(8);
-            health += zombieDTO.getAbilityScore("constitution");
+            health += zombieDTO.getAbilityScoreModifier("constitution");
         }
         zombieDTO.setHp(Integer.toString(health));
     }

@@ -52,6 +52,11 @@ public class ZombieDTO {
     }
 
     @JsonIgnore
+    public int getAbilityScoreModifier(String ability) {
+        return getAbilityScores().stream().filter(a -> a.getName().equals(ability)).mapToInt(Ability::getModifier).findFirst().orElse(0);
+    }
+
+    @JsonIgnore
     public void setAbilityScore(String ability, int score) {
         getAbilityScores().stream().filter(a -> a.getName().equals(ability)).findFirst().ifPresentOrElse(a -> a.setValue(score), new Runnable() {
             @Override
