@@ -15,14 +15,21 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <TextField fx:id="CreatureType" GridPane.columnIndex="1" />
             <TextField fx:id="CreatureRace" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label alignment="CENTER" text="Creature Type" textAlignment="CENTER" GridPane.halignment="CENTER" />
             <Label text="Creature Race" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="TypeValidate" mnemonicParsing="false" onAction="#validateClick" text="Validate" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-            <Button fx:id="RaceValidate" mnemonicParsing="false" onAction="#validateClick" text="Validate" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button fx:id="TypeValidate" mnemonicParsing="false" onAction="#validateClick" text="Validate" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <TextField fx:id="Armour" layoutX="121.0" layoutY="77.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="Melee" layoutX="121.0" layoutY="130.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="Ranged" layoutX="121.0" layoutY="182.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label alignment="CENTER" layoutX="29.0" layoutY="28.0" text="Armour" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="134.0" text="Melee Weapon" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="186.0" text="Ranged Weapon" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" VBox.vgrow="ALWAYS">

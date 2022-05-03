@@ -1,6 +1,7 @@
 package mitchell.dnd.dndzombieorganiser.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.api.APIConnectionManager;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
@@ -12,12 +13,19 @@ import mitchell.dnd.dndzombieorganiser.data.Ability;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class Helper {
 
-    public static boolean validateCreatureType(String type) throws IOException, InterruptedException {
-        CallManager callMan = getCreatureType(type);
-        return callMan.getStatusCode() == 200;
+    public static boolean validateCreatureType(String type) {
+        int status = 500;
+        try {
+            status = getCreatureType(type).getStatusCode();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return status == 200;
     }
 
     public static CallManager getCreatureType(String type) throws IOException, InterruptedException {
@@ -35,15 +43,44 @@ public class Helper {
         return new CallManager(APIConnectionManager.getRace().getRace(race));
     }
 
+    public static boolean validateWeapon(String weapon) {
+        int status = 500;
+        try {
+            status = getEquipment(weapon).getStatusCode();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return status == 200;
+    }
+
+    public static boolean validateArmour(String armour) {
+        int status = 500;
+        try {
+            status = getEquipment(armour).getStatusCode();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return status == 200;
+    }
+
+    public static CallManager getEquipment(String item) throws IOException, InterruptedException {
+        item = formatStrings(item);
+        return new CallManager(APIConnectionManager.getEquipment().getEquipment(item));
+    }
+
     private static String formatStrings(String string) {
         String newString = string.toLowerCase();
         newString = newString.trim();
         return newString;
     }
 
-    public static void addZombie(DataDTO data, JsonNode raceJson, JsonNode typeJson) {
+    public static void addZombie(DataDTO data, Map<String, String> args) throws IOException, InterruptedException {
         ZombieDTO newZombie = new ZombieDTO();
-        RaceDTO raceDTO = new RaceDTO(raceJson);
+
+        CallManager callManager = getCreatureRace(args.get("race"));
+        RaceDTO raceDTO = new RaceDTO(callManager.getJson().orElseThrow());
+        callManager = getCreatureType(args.get("type"));
+        JsonNode typeJson = callManager.getJson().orElseThrow();
 
         Arrays.stream(Rules.ability.values()).sequential().forEach( a ->
                 newZombie.getAbilityScores().add(new Ability(a.toString(), calculateAbilityScore(calculateCurrentAbilityScore(a, raceDTO, typeJson), Rules.creature.zombie, a)))

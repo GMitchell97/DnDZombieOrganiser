@@ -55,11 +55,10 @@ public class HelperTests {
         ObjectMapper mapper = new ObjectMapper();
         DataDTO data = new DataDTO();
 
-        CallManager callMan = getCreatureType("bandit");
-        JsonNode typeJson = mapper.readTree(callMan.getJson());
-        callMan = getCreatureRace("Human");
-        JsonNode raceJson = mapper.readTree(callMan.getJson());
-        Helper.addZombie(data, raceJson, typeJson);
+        Helper.addZombie(data, Map.of(
+                "type", "bandit",
+                "race", "human"
+        ));
 
         ZombieDTO zombie = data.getZombies().get(0);
 
@@ -73,9 +72,7 @@ public class HelperTests {
         );
 
         exp.forEach((n, v) ->
-                assertEquals(v.intValue(),
-                        zombie.getAbilityScores().stream().filter(a -> a.getName().equals(n)).mapToInt(Ability::getValue).findFirst().orElse(0),
-                        n + " was: " + zombie.getAbilityScores().stream().filter(a -> a.getName().equals(n)).mapToInt(Ability::getValue).findFirst().orElse(0))
+                assertEquals(v.intValue(), zombie.getAbilityScore(n), n + " was: " + zombie.getAbilityScore(n))
         );
     }
 
@@ -84,9 +81,7 @@ public class HelperTests {
         ObjectMapper mapper = new ObjectMapper();
 
         CallManager callMan = getCreatureRace("Human");
-        JsonNode raceJson = mapper.readTree(callMan.getJson());
-
-        RaceDTO raceDTO = new RaceDTO(raceJson);
+        RaceDTO raceDTO = new RaceDTO(callMan.getJson().orElseThrow());
 
         assertEquals(1, raceDTO.getAbilityScoreBonus(Rules.ability.strength));
     }
@@ -96,9 +91,8 @@ public class HelperTests {
         ObjectMapper mapper = new ObjectMapper();
 
         CallManager callMan = getCreatureRace("elf");
-        JsonNode raceJson = mapper.readTree(callMan.getJson());
 
-        RaceDTO raceDTO = new RaceDTO(raceJson);
+        RaceDTO raceDTO = new RaceDTO(callMan.getJson().orElseThrow());
 
         assertEquals(0, raceDTO.getAbilityScoreBonus(Rules.ability.intelligence));
     }

@@ -12,6 +12,10 @@ public class APIConnectionManager {
         return new Monsters();
     }
 
+    public static Equipment getEquipment() {
+        return new Equipment();
+    }
+
     public static String getBaseURL() {
         return BASEURL;
     }

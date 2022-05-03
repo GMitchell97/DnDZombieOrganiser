@@ -1,10 +1,15 @@
 package mitchell.dnd.dndzombieorganiser.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 
 public class CallManager {
 
@@ -27,8 +32,15 @@ public class CallManager {
         httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
     }
 
-    public String getJson() {
-        return httpResponse.body();
+    public Optional<JsonNode> getJson() {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node = null;
+        try {
+             node = mapper.readTree(httpResponse.body());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(node) ;
     }
 
     public int getStatusCode() {

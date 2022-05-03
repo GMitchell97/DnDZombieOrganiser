@@ -12,6 +12,9 @@ import mitchell.dnd.dndzombieorganiser.api.CallManager;
 import mitchell.dnd.dndzombieorganiser.data.DataDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static mitchell.dnd.dndzombieorganiser.core.Helper.*;
 
@@ -21,42 +24,45 @@ public class UIAddZombieController {
 
     @FXML
     protected TextField CreatureType;
-
     @FXML
     protected TextField CreatureRace;
-
     @FXML
-    protected void validateClick(ActionEvent event) throws IOException, InterruptedException {
-        if (((Button)event.getSource()).getId().equals("TypeValidate")) {
-            if (validateCreatureType(CreatureType.getText())) {
-                CreatureType.setStyle("-fx-text-fill: green;");
+    protected TextField Armour;
+    @FXML
+    protected TextField Melee;
+    @FXML
+    protected TextField Ranged;
+
+    private boolean isValid;
+    @FXML
+    protected void validateClick() {
+        isValid = true;
+        ValidateField(validateCreatureType(CreatureType.getText()), CreatureType);
+        ValidateField(validateCreatureRace(CreatureRace.getText()), CreatureRace);
+        ValidateField(validateArmour(Armour.getText()), Armour);
+        ValidateField(validateWeapon(Melee.getText()), Melee);
+        ValidateField(validateWeapon(Ranged.getText()), Ranged);
+    }
+
+    private void ValidateField(boolean isValid, TextField field) {
+            if (isValid) {
+                field.setStyle("-fx-text-fill: green;");
             } else {
-                CreatureType.setStyle("-fx-text-fill: red;");
+                field.setStyle("-fx-text-fill: red;");
+                this.isValid = false;
             }
-        } else if (((Button)event.getSource()).getId().equals("RaceValidate")) {
-            if (validateCreatureRace(CreatureRace.getText())) {
-                CreatureRace.setStyle("-fx-text-fill: green;");
-            } else {
-                CreatureRace.setStyle("-fx-text-fill: red;");
-            }
-        }
     }
 
     @FXML
     protected void addZombie() throws IOException, InterruptedException {
-        ObjectMapper mapper = new ObjectMapper();
-
-        CallManager callMan = getCreatureType(CreatureType.getText());
-        if (callMan.getStatusCode() == 200) {
-            JsonNode typeJson = mapper.readTree(callMan.getJson());
-            callMan = getCreatureRace(CreatureRace.getText());
-            if (callMan.getStatusCode() == 200) {
-                JsonNode raceJson = mapper.readTree(callMan.getJson());
-                Helper.addZombie(data, raceJson, typeJson);
-            }
+        validateClick();
+        if (isValid) {
+            Helper.addZombie(data, Map.of(
+                    "type", CreatureType.getText(),
+                    "race", CreatureRace.getText()
+            ));
+            ((Stage) CreatureRace.getScene().getWindow()).close();
         }
-
-        ((Stage)CreatureRace.getScene().getWindow()).close();
     }
 
     public void setData(DataDTO data) {
