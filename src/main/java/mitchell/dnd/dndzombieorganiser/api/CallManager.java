@@ -17,10 +17,14 @@ public class CallManager {
     private boolean connected = false;
 
     public CallManager(String url) {
-        getRequest(url);
+        try {
+            getRequest(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void getRequest(String url) {
+    private void getRequest(String url) throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -29,13 +33,9 @@ public class CallManager {
         makeRequest(httpClient, httpRequest);
     }
 
-    private void makeRequest(HttpClient httpClient, HttpRequest httpRequest) {
-        try {
-            httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            connected = true;
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    private void makeRequest(HttpClient httpClient, HttpRequest httpRequest) throws IOException, InterruptedException {
+        httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        connected = true;
     }
 
     public Optional<JsonNode> getJson() {

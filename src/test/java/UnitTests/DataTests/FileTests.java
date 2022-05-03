@@ -5,12 +5,17 @@ import mitchell.dnd.dndzombieorganiser.data.FileHandler;
 import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FileTests {
 
@@ -30,11 +35,11 @@ public class FileTests {
         handler.saveSave("Test1.json", dataDTO);
         DataDTO testDTO = handler.loadSave("Test1.json");
 
-        Assertions.assertEquals(1, testDTO.getZombies().size());
-        Assertions.assertEquals("Gerard", testDTO.getZombies().get(0).getName());
-        Assertions.assertEquals("1", testDTO.getZombies().get(0).getId());
-        Assertions.assertEquals("30", testDTO.getZombies().get(0).getHp());
-        Assertions.assertEquals("12", testDTO.getZombies().get(0).getAc());
+        assertEquals(1, testDTO.getZombies().size());
+        assertEquals("Gerard", testDTO.getZombies().get(0).getName());
+        assertEquals("1", testDTO.getZombies().get(0).getId());
+        assertEquals("30", testDTO.getZombies().get(0).getHp());
+        assertEquals("12", testDTO.getZombies().get(0).getAc());
     }
 
     @Test
@@ -54,16 +59,23 @@ public class FileTests {
         handler.saveSave("Test1.json", dataDTO);
         DataDTO testDTO = handler.loadSave("Test1.json");
 
-        Assertions.assertEquals(2, testDTO.getZombies().size());
-        Assertions.assertEquals("Gerard", testDTO.getZombies().get(0).getName());
-        Assertions.assertEquals("1", testDTO.getZombies().get(0).getId());
-        Assertions.assertEquals("30", testDTO.getZombies().get(0).getHp());
-        Assertions.assertEquals("12", testDTO.getZombies().get(0).getAc());
+        assertEquals(2, testDTO.getZombies().size());
+        assertEquals("Gerard", testDTO.getZombies().get(0).getName());
+        assertEquals("1", testDTO.getZombies().get(0).getId());
+        assertEquals("30", testDTO.getZombies().get(0).getHp());
+        assertEquals("12", testDTO.getZombies().get(0).getAc());
 
-        Assertions.assertEquals("Mike", testDTO.getZombies().get(1).getName());
-        Assertions.assertEquals("2", testDTO.getZombies().get(1).getId());
-        Assertions.assertEquals("20", testDTO.getZombies().get(1).getHp());
-        Assertions.assertEquals("16", testDTO.getZombies().get(1).getAc());
+        assertEquals("Mike", testDTO.getZombies().get(1).getName());
+        assertEquals("2", testDTO.getZombies().get(1).getId());
+        assertEquals("20", testDTO.getZombies().get(1).getHp());
+        assertEquals("16", testDTO.getZombies().get(1).getAc());
+    }
+
+    @ParameterizedTest(name = "[{index}] Testing for value = {arguments}")
+    @ValueSource(strings = {"", "Test", "Test.png"})
+    public void negativeLoadSave(String name) {
+        DataDTO data = handler.loadSave(name);
+        assertNotEquals(null, data);
     }
 
     @AfterEach

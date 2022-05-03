@@ -44,6 +44,22 @@ public class DiceRollerTests {
         assertEquals(2.5, diceRoller.averageRoll(4));
     }
 
+    @Test
+    public void getStatsReturnsCorrectString() {
+        List<Pair> history = new ArrayList<>();
+        history.add(new Pair(4, 1));
+        history.add(new Pair(4, 2));
+        history.add(new Pair(4, 3));
+        history.add(new Pair(4, 4));
+        history.add(new Pair(8, 1));
+        history.add(new Pair(8, 2));
+        history.add(new Pair(8, 3));
+        history.add(new Pair(8, 4));
+
+        diceRoller.addHistory(history);
+        assertEquals("Average rolls are as follows: d4: 2.5 d8: 2.5 d12: 0.0 d20: 0.0 d100: 0.0.", diceRoller.getStats());
+    }
+
 //    @Test
     public void averageDiceRolls() {
         for (int i = 0; i < 10000; i++) {
