@@ -1,13 +1,9 @@
-package fileTests;
+package UnitTests.DTOTests;
 
-import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.core.Helper;
-import mitchell.dnd.dndzombieorganiser.data.ArmourDTO;
-import org.junit.jupiter.api.Assertions;
+import mitchell.dnd.dndzombieorganiser.data.dto.ArmourDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +12,7 @@ public class ArmourDTOTests {
     private ArmourDTO armourDTO;
 
     @BeforeEach
-    public void setup() throws IOException, InterruptedException {
+    public void setup() {
         armourDTO = new ArmourDTO(Helper.getEquipment("leather-armor").getJson().orElseThrow());
     }
 

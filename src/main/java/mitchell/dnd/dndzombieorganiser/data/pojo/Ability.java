@@ -1,4 +1,4 @@
-package mitchell.dnd.dndzombieorganiser.data;
+package mitchell.dnd.dndzombieorganiser.data.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

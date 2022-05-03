@@ -1,4 +1,4 @@
-package mitchell.dnd.dndzombieorganiser.data;
+package mitchell.dnd.dndzombieorganiser.data.dto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import mitchell.dnd.dndzombieorganiser.UI.ZombieWrapper;
 import mitchell.dnd.dndzombieorganiser.core.DiceRoller;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Pair;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

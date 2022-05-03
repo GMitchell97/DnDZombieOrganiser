@@ -1,7 +1,7 @@
-package mitchell.dnd.dndzombieorganiser.data;
+package mitchell.dnd.dndzombieorganiser.data.dto;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import mitchell.dnd.dndzombieorganiser.Constants;
+import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
 
 import static mitchell.dnd.dndzombieorganiser.Constants.*;
 

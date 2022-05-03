@@ -1,4 +1,4 @@
-package mitchell.dnd.dndzombieorganiser.data;
+package mitchell.dnd.dndzombieorganiser.data.dto;
 
 import com.fasterxml.jackson.databind.JsonNode;
 

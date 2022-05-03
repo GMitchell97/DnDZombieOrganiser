@@ -1,8 +1,7 @@
 package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.beans.property.SimpleStringProperty;
-import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
-import mitchell.dnd.dndzombieorganiser.data.Ability;
+import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
 
 public class ZombieWrapper {
 

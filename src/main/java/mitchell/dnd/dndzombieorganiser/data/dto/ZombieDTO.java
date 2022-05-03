@@ -1,4 +1,4 @@
-package mitchell.dnd.dndzombieorganiser.data;
+package mitchell.dnd.dndzombieorganiser.data.dto;
 
 import java.util.*;
 import javax.annotation.Generated;
@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Ability;
+import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({

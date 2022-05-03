@@ -1,9 +1,12 @@
-package fileTests;
+package UnitTests.DTOTests;
 
 import mitchell.dnd.dndzombieorganiser.UI.ZombieWrapper;
 import mitchell.dnd.dndzombieorganiser.core.Helper;
-import mitchell.dnd.dndzombieorganiser.data.*;
-import org.junit.jupiter.api.Assertions;
+import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Ability;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

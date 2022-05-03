@@ -1,26 +1,16 @@
-package fileTests;
+package UnitTests.DataTests;
 
-import mitchell.dnd.dndzombieorganiser.data.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.FileHandler;
-import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class FileTests {
 

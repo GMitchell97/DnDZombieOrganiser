@@ -1,7 +1,7 @@
-package fileTests;
+package UnitTests.HelperTests;
 
 import mitchell.dnd.dndzombieorganiser.core.DiceRoller;
-import mitchell.dnd.dndzombieorganiser.data.Pair;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Pair;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

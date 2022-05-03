@@ -1,14 +1,12 @@
-package fileTests;
+package UnitTests.HelperTests;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import mitchell.dnd.dndzombieorganiser.core.Helper;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
-import mitchell.dnd.dndzombieorganiser.data.DataDTO;
-import mitchell.dnd.dndzombieorganiser.data.RaceDTO;
-import mitchell.dnd.dndzombieorganiser.data.Rules;
-import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
-import mitchell.dnd.dndzombieorganiser.data.Ability;
+import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.RaceDTO;
+import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
+import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

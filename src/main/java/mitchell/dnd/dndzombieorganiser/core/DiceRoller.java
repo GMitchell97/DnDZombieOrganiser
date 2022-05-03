@@ -1,7 +1,7 @@
 package mitchell.dnd.dndzombieorganiser.core;
 
 
-import mitchell.dnd.dndzombieorganiser.data.Pair;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Pair;
 
 import java.util.*;
 

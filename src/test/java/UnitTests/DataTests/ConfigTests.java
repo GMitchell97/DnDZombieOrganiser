@@ -1,6 +1,6 @@
-package fileTests;
+package UnitTests.DataTests;
 
-import mitchell.dnd.dndzombieorganiser.data.Config;
+import mitchell.dnd.dndzombieorganiser.data.properties.Config;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

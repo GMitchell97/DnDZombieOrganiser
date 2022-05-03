@@ -1,23 +1,15 @@
 package mitchell.dnd.dndzombieorganiser.UI;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.core.Helper;
-import mitchell.dnd.dndzombieorganiser.api.CallManager;
-import mitchell.dnd.dndzombieorganiser.data.Config;
-import mitchell.dnd.dndzombieorganiser.data.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static mitchell.dnd.dndzombieorganiser.core.Helper.*;

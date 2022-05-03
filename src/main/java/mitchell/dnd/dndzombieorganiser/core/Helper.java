@@ -1,15 +1,17 @@
 package mitchell.dnd.dndzombieorganiser.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.api.APIConnectionManager;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
-import mitchell.dnd.dndzombieorganiser.data.*;
+import mitchell.dnd.dndzombieorganiser.data.dto.ArmourDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.RaceDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Ability;
 
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class Helper {
@@ -61,7 +63,7 @@ public class Helper {
         JsonNode typeJson = callManager.getJson().orElseThrow();
         newZombie.setArmour(args.get("armour"));
 
-        Arrays.stream(Rules.ability.values()).sequential().forEach( a ->
+        Arrays.stream(Rules.ability.values()).sequential().forEach(a ->
                 newZombie.getAbilityScores().add(new Ability(a.toString(), calculateAbilityScore(calculateCurrentAbilityScore(a, raceDTO, typeJson), Rules.creature.zombie, a)))
         );
 
