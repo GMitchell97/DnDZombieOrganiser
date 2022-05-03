@@ -9,10 +9,13 @@ import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
 import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static mitchell.dnd.dndzombieorganiser.core.Helper.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -96,5 +99,28 @@ public class HelperTests {
         RaceDTO raceDTO = new RaceDTO(callMan.getJson().orElseThrow());
 
         assertEquals(0, raceDTO.getAbilityScoreBonus(Rules.ability.intelligence));
+    }
+
+    private static Stream<Arguments> AC() {
+        return Stream.of(
+                Arguments.of("none", "8"),
+                Arguments.of("", "8"),
+                Arguments.of("leather-armor", "9"),
+                Arguments.of("half-plate-armor", "13"),
+                Arguments.of("splint-armor", "17")
+        );
+    }
+
+    @ParameterizedTest()
+    @MethodSource("AC")
+    public void calculateACreturnsCorrectValue(String armour, String exp) {
+        ZombieDTO zombie = new ZombieDTO();
+        zombie.setAbilityScore("dexterity", 6);
+        zombie.setArmour(armour);
+
+        calculateAC(zombie);
+
+        assertEquals(exp, zombie.getAc());
+
     }
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.data.pojo.Ability;
 import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
 
@@ -74,6 +75,12 @@ public class ZombieDTO {
 
     @JsonProperty("Armour")
     public String getArmour() {
+        if (armour != null) {
+            if (Constants.ARMOUR.contains(armour)) {
+                return armour;
+            }
+        }
+        armour = "none";
         return armour;
     }
 
