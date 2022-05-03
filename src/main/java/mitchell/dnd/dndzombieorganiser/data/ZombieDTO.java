@@ -29,6 +29,8 @@ public class ZombieDTO {
     private String ac;
     @JsonProperty("Ability_Scores")
     private List<Ability> abilityScores;
+    @JsonProperty("Armour")
+    private String armour;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -66,6 +68,16 @@ public class ZombieDTO {
                 }
             }
         });
+    }
+
+    @JsonProperty("Armour")
+    public String getArmour() {
+        return armour;
+    }
+
+    @JsonProperty("Armour")
+    public void setArmour(String armour) {
+        this.armour = armour;
     }
 
     @JsonProperty("ID")
@@ -106,6 +118,11 @@ public class ZombieDTO {
     @JsonProperty("AC")
     public void setAc(String ac) {
         this.ac = ac;
+    }
+
+    @JsonProperty("AC")
+    public void setAc(int ac) {
+        this.ac = Integer.toString(ac);
     }
 
     @JsonAnyGetter

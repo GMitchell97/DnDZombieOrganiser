@@ -57,7 +57,8 @@ public class HelperTests {
 
         Helper.addZombie(data, Map.of(
                 "type", "bandit",
-                "race", "human"
+                "race", "human",
+                "armour", "none"
         ));
 
         ZombieDTO zombie = data.getZombies().get(0);
@@ -74,6 +75,8 @@ public class HelperTests {
         exp.forEach((n, v) ->
                 assertEquals(v.intValue(), zombie.getAbilityScore(n), n + " was: " + zombie.getAbilityScore(n))
         );
+        assertEquals("8", zombie.getAc());
+        assertEquals("none", zombie.getArmour());
     }
 
     @Test

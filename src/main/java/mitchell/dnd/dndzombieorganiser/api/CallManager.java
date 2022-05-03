@@ -14,12 +14,13 @@ import java.util.Optional;
 public class CallManager {
 
     private HttpResponse<String> httpResponse = null;
+    private boolean connected = false;
 
-    public CallManager(String url) throws IOException, InterruptedException {
+    public CallManager(String url) {
         getRequest(url);
     }
 
-    private void getRequest(String url) throws IOException, InterruptedException {
+    private void getRequest(String url) {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -28,11 +29,20 @@ public class CallManager {
         makeRequest(httpClient, httpRequest);
     }
 
-    private void makeRequest(HttpClient httpClient, HttpRequest httpRequest) throws IOException, InterruptedException {
-        httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+    private void makeRequest(HttpClient httpClient, HttpRequest httpRequest) {
+        try {
+            httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            connected = true;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public Optional<JsonNode> getJson() {
+        if (!connected) {
+            return Optional.empty();
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = null;
         try {
@@ -44,6 +54,6 @@ public class CallManager {
     }
 
     public int getStatusCode() {
-        return httpResponse.statusCode();
+        return connected ? httpResponse.statusCode() : 500;
     }
 }
