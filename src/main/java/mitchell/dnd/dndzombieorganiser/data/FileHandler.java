@@ -1,18 +1,14 @@
 package mitchell.dnd.dndzombieorganiser.data;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import javafx.stage.FileChooser;
+import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 
 public class FileHandler {
 
@@ -59,6 +55,7 @@ public class FileHandler {
                 }
                 Files.createFile(Paths.get(fileName));
             }
+            dataDTO.saveRollHistory();
             String json = writer.writeValueAsString(dataDTO);
             FileWriter save = new FileWriter(fileName);
             save.write(json);

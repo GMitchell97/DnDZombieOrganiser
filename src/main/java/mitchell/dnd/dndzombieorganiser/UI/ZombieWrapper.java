@@ -1,7 +1,7 @@
 package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.beans.property.SimpleStringProperty;
-import mitchell.dnd.dndzombieorganiser.data.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
 
 public class ZombieWrapper {
 
@@ -85,7 +85,7 @@ public class ZombieWrapper {
     }
 
     public String getStrength() {
-        return zombie.getStrength();
+        return Integer.toString(zombie.getAbilityScore("strength"));
     }
 
     public SimpleStringProperty strengthProperty() {
@@ -93,11 +93,11 @@ public class ZombieWrapper {
     }
 
     public void setStrength(String strength) {
-        zombie.setStrength(strength);
+        zombie.setAbilityScore("strength", Integer.parseInt(strength));
     }
 
     public String getDexterity() {
-        return zombie.getDexterity();
+        return Integer.toString(zombie.getAbilityScore("dexterity"));
     }
 
     public SimpleStringProperty dexterityProperty() {
@@ -105,11 +105,11 @@ public class ZombieWrapper {
     }
 
     public void setDexterity(String dexterity) {
-        zombie.setDexterity(dexterity);
+        zombie.setAbilityScore("dexterity", Integer.parseInt(dexterity));
     }
 
     public String getConstitution() {
-        return zombie.getConstitution();
+        return Integer.toString(zombie.getAbilityScore("constitution"));
     }
 
     public SimpleStringProperty constitutionProperty() {
@@ -117,11 +117,11 @@ public class ZombieWrapper {
     }
 
     public void setConstitution(String constitution) {
-        zombie.setConstitution(constitution);
+        zombie.setAbilityScore("constitution", Integer.parseInt(constitution));
     }
 
     public String getIntelligence() {
-        return zombie.getIntelligence();
+        return Integer.toString(zombie.getAbilityScore("intelligence"));
     }
 
     public SimpleStringProperty intelligenceProperty() {
@@ -129,11 +129,11 @@ public class ZombieWrapper {
     }
 
     public void setIntelligence(String intelligence) {
-        zombie.setIntelligence(intelligence);
+        zombie.setAbilityScore("intelligence", Integer.parseInt(intelligence));
     }
 
     public String getWisdom() {
-        return zombie.getWisdom();
+        return Integer.toString(zombie.getAbilityScore("wisdom"));
     }
 
     public SimpleStringProperty wisdomProperty() {
@@ -141,11 +141,11 @@ public class ZombieWrapper {
     }
 
     public void setWisdom(String wisdom) {
-        zombie.setWisdom(wisdom);
+        zombie.setAbilityScore("wisdom", Integer.parseInt(wisdom));
     }
 
     public String getCharisma() {
-        return zombie.getCharisma();
+        return Integer.toString(zombie.getAbilityScore("charisma"));
     }
 
     public SimpleStringProperty charismaProperty() {
@@ -153,6 +153,6 @@ public class ZombieWrapper {
     }
 
     public void setCharisma(String charisma) {
-        zombie.setCharisma(charisma);
+        zombie.setAbilityScore("charisma", Integer.parseInt(charisma));
     }
 }

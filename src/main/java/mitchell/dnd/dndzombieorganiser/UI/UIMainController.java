@@ -10,8 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import mitchell.dnd.dndzombieorganiser.data.Config;
-import mitchell.dnd.dndzombieorganiser.data.DataDTO;
+import mitchell.dnd.dndzombieorganiser.data.properties.Config;
+import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.FileHandler;
 
 import java.io.File;

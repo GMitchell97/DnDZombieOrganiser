@@ -1,4 +1,4 @@
-package mitchell.dnd.dndzombieorganiser.data;
+package mitchell.dnd.dndzombieorganiser.data.properties;
 
 import java.io.*;
 import java.nio.file.Path;

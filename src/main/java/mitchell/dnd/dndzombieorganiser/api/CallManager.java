@@ -1,17 +1,27 @@
 package mitchell.dnd.dndzombieorganiser.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 
 public class CallManager {
 
     private HttpResponse<String> httpResponse = null;
+    private boolean connected = false;
 
-    public CallManager(String url) throws IOException, InterruptedException {
-        getRequest(url);
+    public CallManager(String url) {
+        try {
+            getRequest(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getRequest(String url) throws IOException, InterruptedException {
@@ -25,13 +35,25 @@ public class CallManager {
 
     private void makeRequest(HttpClient httpClient, HttpRequest httpRequest) throws IOException, InterruptedException {
         httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        connected = true;
     }
 
-    public String getJson() {
-        return httpResponse.body();
+    public Optional<JsonNode> getJson() {
+        if (!connected) {
+            return Optional.empty();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node = null;
+        try {
+             node = mapper.readTree(httpResponse.body());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(node) ;
     }
 
     public int getStatusCode() {
-        return httpResponse.statusCode();
+        return connected ? httpResponse.statusCode() : 500;
     }
 }
