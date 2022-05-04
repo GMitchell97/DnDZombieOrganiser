@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.api.APIConnectionManager;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
+import mitchell.dnd.dndzombieorganiser.data.builders.WeaponBuilder;
 import mitchell.dnd.dndzombieorganiser.data.dto.ArmourDTO;
 import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.dto.RaceDTO;
@@ -69,6 +70,17 @@ public class Helper {
 
         calculateAC(newZombie);
         calculateHealth(newZombie, data);
+
+        if (args.containsKey("melee")) {
+            callManager = getEquipment(args.get("melee"));
+            newZombie.addWeapon("melee", WeaponBuilder.createWeapon(callManager.getJson().orElseThrow()));
+        }
+
+        if (args.containsKey("ranged")) {
+            callManager = getEquipment(args.get("ranged"));
+            newZombie.addWeapon("ranged", WeaponBuilder.createWeapon(callManager.getJson().orElseThrow()));
+        }
+
         data.addZombie(newZombie);
     }
 

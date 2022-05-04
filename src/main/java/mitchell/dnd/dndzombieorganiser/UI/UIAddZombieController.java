@@ -60,12 +60,19 @@ public class UIAddZombieController {
     protected void addZombie() throws IOException, InterruptedException {
         validateClick();
         if (isValid) {
-            Helper.addZombie(data, Map.of(
-                    "type", CreatureType.getText(),
-                    "race", CreatureRace.getValue(),
-                    "armour", Armour.getValue()
-            ));
-            ((Stage) CreatureRace.getScene().getWindow()).close();
+             Map<String, String> args = new java.util.HashMap<>(Map.of(
+                     "type", CreatureType.getText(),
+                     "race", CreatureRace.getValue(),
+                     "armour", Armour.getValue()
+             ));
+            if (!Melee.getText().equals("")) {
+                args.put("melee", Melee.getText());
+            }
+            if (!Ranged.getText().equals("")) {
+                args.put("ranged", Ranged.getText());
+            }
+            Helper.addZombie(data, args);
+                    ((Stage) CreatureRace.getScene().getWindow()).close();
         }
     }
 

@@ -9,7 +9,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import mitchell.dnd.dndzombieorganiser.Constants;
+import mitchell.dnd.dndzombieorganiser.core.DiceRoller;
 import mitchell.dnd.dndzombieorganiser.data.pojo.Ability;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Pair;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Weapon;
 import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -34,6 +37,8 @@ public class ZombieDTO {
     private List<Ability> abilityScores;
     @JsonProperty("Armour")
     private String armour;
+    @JsonProperty("Weapons")
+    private Map<String,Weapon> weapons;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -87,6 +92,29 @@ public class ZombieDTO {
     @JsonProperty("Armour")
     public void setArmour(String armour) {
         this.armour = armour;
+    }
+
+    @JsonProperty("Weapons")
+    public Map<String, Weapon> getWeapons() {
+        if (weapons == null) {
+            weapons = new HashMap<>();
+        }
+        return weapons;
+    }
+
+    @JsonProperty("Weapons")
+    public void setWeapons(Map<String, Weapon> weapons) {
+        this.weapons = weapons;
+    }
+
+    @JsonIgnore
+    public void addWeapon(String slot, Weapon weapon) {
+        getWeapons().put(slot, weapon);
+    }
+
+    @JsonIgnore
+    public Pair makeWeaponAttack(String weaponSlot, DiceRoller dice) {
+        return Objects.requireNonNull(getWeapons().get(weaponSlot)).attack(dice);
     }
 
     @JsonProperty("ID")
