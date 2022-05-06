@@ -49,4 +49,16 @@ public class Rules {
         }
     }
 
+    public int getOwnerLevel() {
+        return Integer.parseInt(getAttribute("owner.level"));
+    }
+
+    public int getOwnerProficiency() {
+        return Integer.parseInt(getAttribute("owner.proficiency"));
+    }
+
+    public boolean ownerHasUndeadThralls() {
+        return Boolean.parseBoolean(getAttribute("owner.undeadthralls"));
+    }
+
 }

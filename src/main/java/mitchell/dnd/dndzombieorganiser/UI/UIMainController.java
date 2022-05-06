@@ -53,6 +53,8 @@ public class UIMainController {
                 columns.get(index).setOnEditCommit(sc.editEventHandler);
             }
             columns.get(index).setEditable(sc.editable);
+            columns.get(index).setPrefWidth(sc.width);
+            columns.get(index).setStyle("-fx-alignment: CENTER;");
         }
 
         loadTableData();

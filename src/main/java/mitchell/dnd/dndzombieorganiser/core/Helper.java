@@ -68,17 +68,22 @@ public class Helper {
                 newZombie.getAbilityScores().add(new Ability(a.toString(), calculateAbilityScore(calculateCurrentAbilityScore(a, raceDTO, typeJson), Rules.creature.zombie, a)))
         );
 
+        String walkSpeed = getCreatureType("zombie").getJson().orElseThrow().get("speed").get("walk").asText().substring(0,2);
+
+        newZombie.setSpeed(Integer.parseInt(walkSpeed));
         calculateAC(newZombie);
         calculateHealth(newZombie, data);
 
         if (args.containsKey("melee")) {
             callManager = getEquipment(args.get("melee"));
             newZombie.addWeapon("melee", WeaponBuilder.createWeapon(callManager.getJson().orElseThrow()));
+            WeaponBuilder.configWeapon("melee", newZombie);
         }
 
         if (args.containsKey("ranged")) {
             callManager = getEquipment(args.get("ranged"));
             newZombie.addWeapon("ranged", WeaponBuilder.createWeapon(callManager.getJson().orElseThrow()));
+            WeaponBuilder.configWeapon("ranged", newZombie);
         }
 
         data.addZombie(newZombie);
@@ -103,6 +108,10 @@ public class Helper {
             health += dataDTO.getDiceRoller().rollDice(8);
             health += zombieDTO.getAbilityScoreModifier("constitution");
         }
+        Rules rules = new Rules();
+        if (rules.ownerHasUndeadThralls()) {
+            health += rules.getOwnerLevel();
+        }
         zombieDTO.setHp(Integer.toString(health));
     }
 
@@ -119,6 +128,9 @@ public class Helper {
                 zombie.setAc(AC);
             } else {
                 zombie.setAc(armourDTO.getBaseAC());
+            }
+            if (armourDTO.isHeavy()) {
+                zombie.setSpeed(zombie.getSpeed() - 5);
             }
         }
     }
