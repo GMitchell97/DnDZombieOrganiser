@@ -38,7 +38,7 @@ public class ZombieTableSchema {
             new Schema("AC", "AC", 60, false),
             new Schema("HP", "HP", 30, false),
             new Schema("Speed", "speed", 60, false),
-            new Schema("Attack", "attack", 120, false),
+            new Schema("Attack", "attack", 200, false),
             new Schema("Str", "strength", 30, false),
             new Schema("Dex", "dexterity", 30, false),
             new Schema("Con", "constitution", 30, false),

@@ -72,6 +72,6 @@ public class ZombieDTOTests {
         zombie.setAbilityScore("constitution", 16);
         Helper.calculateHealth(zombie, data);
         int value = Integer.parseInt(zombie.getHp());
-        assertEquals(data.getDiceRoller().getHistory().stream().mapToInt(Pair::getB).sum() + 9, value);
+        assertEquals(data.getDiceRoller().getHistory().stream().mapToInt(Pair::getB).sum() + 17, value);
     }
 }

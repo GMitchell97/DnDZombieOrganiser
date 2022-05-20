@@ -2,6 +2,7 @@ package mitchell.dnd.dndzombieorganiser.data.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.core.DiceRoller;
 
 import java.util.List;
@@ -12,8 +13,10 @@ public class Weapon {
     private String name;
     @JsonProperty("AttackBonus")
     private int attackBonus;
-    @JsonProperty("Damage")
-    private int damage;
+    @JsonProperty("DamageDie")
+    private int damageDie;
+    @JsonProperty("DamageDieAmount")
+    private int damageDieAmount;
     @JsonProperty("DamageBonus")
     private int damageBonus;
     @JsonProperty("Properties")
@@ -39,14 +42,24 @@ public class Weapon {
         this.attackBonus = attackBonus;
     }
 
-    @JsonProperty("Damage")
-    public int getDamage() {
-        return damage;
+    @JsonProperty("DamageDie")
+    public int getDamageDie() {
+        return damageDie;
     }
 
-    @JsonProperty("Damage")
-    public void setDamage(int damage) {
-        this.damage = damage;
+    @JsonProperty("DamageDie")
+    public void setDamageDie(int damageDie) {
+        this.damageDie = damageDie;
+    }
+
+    @JsonProperty("DamageDieAmount")
+    public int getDamageDieAmount() {
+        return damageDieAmount;
+    }
+
+    @JsonProperty("DamageDieAmount")
+    public void setDamageDieAmount(int damageDieAmount) {
+        this.damageDieAmount = damageDieAmount;
     }
 
     @JsonProperty("DamageBonus")
@@ -70,12 +83,23 @@ public class Weapon {
     }
 
     @JsonIgnore
-    public Pair attack(DiceRoller dice) {
-        return new Pair(dice.rollDice(20) + attackBonus, dice.rollDice(damage) + damageBonus);
+    public Pair attack(DiceRoller dice, Constants.RollType r) {
+        int hitDie = 0;
+        switch (r) {
+            case NORMAL -> hitDie = dice.rollDice(20);
+            case ADVANTAGE -> hitDie = Math.max(dice.rollDice(20), dice.rollDice(20));
+            case DISADVANTAGE -> hitDie = Math.min(dice.rollDice(20), dice.rollDice(20));
+        }
+        int damageDieRolls = (hitDie == 20 ? 2 : 1) * getDamageDieAmount();
+        int damageAmount = 0;
+        for (int i = 0; i < damageDieRolls; i++) {
+            damageAmount += dice.rollDice(getDamageDie());
+        }
+        return new Pair(hitDie + attackBonus, damageAmount + damageBonus);
     }
 
     @JsonIgnore
     public String toString() {
-        return getName() + ", H: 1d20 +" + getAttackBonus() + ", D: 1d" + getDamage() + " +" + getDamageBonus();
+        return getName() + ", H: 1d20 +" + getAttackBonus() + ", D: " + getDamageDieAmount() + "d" + getDamageDie() + " +" + getDamageBonus();
     }
 }

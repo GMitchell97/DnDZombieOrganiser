@@ -63,10 +63,7 @@ public class DataDTO {
 
     @JsonProperty("RollHistory")
     public List<Pair> getRollHistory() {
-        if (RollHistory == null) {
-            RollHistory = new ArrayList<>();
-        }
-        return RollHistory;
+        return getDiceRoller().getHistory();
     }
 
     @JsonProperty("RollHistory")
@@ -82,12 +79,6 @@ public class DataDTO {
                 diceRoller.addHistory(RollHistory);
         }
         return diceRoller;
-    }
-
-    @JsonIgnore
-    public void saveRollHistory() {
-        if (diceRoller != null)
-            RollHistory = diceRoller.getHistory();
     }
 
     @JsonIgnore

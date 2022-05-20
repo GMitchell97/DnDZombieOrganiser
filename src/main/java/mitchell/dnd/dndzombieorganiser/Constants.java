@@ -14,4 +14,10 @@ public class Constants {
     public static List<String> RACES = List.of("dragonborn", "dwarf", "elf", "gnome", "half-elf", "half-orc", "halfling", "human", "tiefling");
     public static List<String> ARMOUR = List.of("none", "padded-armor", "leather-armor", "studded-leather-armor", "hide-armor", "chain-shirt", "scale-mail", "breastplate",
             "half-plate-armor", "ring-mail", "chain-mail", "splint-armor", "plate-armor");
+
+    public enum RollType {
+        ADVANTAGE,
+        NORMAL,
+        DISADVANTAGE
+    }
 }

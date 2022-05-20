@@ -2,6 +2,7 @@ package mitchell.dnd.dndzombieorganiser.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import mitchell.dnd.dndzombieorganiser.Constants;
+import mitchell.dnd.dndzombieorganiser.UI.ZombieWrapper;
 import mitchell.dnd.dndzombieorganiser.api.APIConnectionManager;
 import mitchell.dnd.dndzombieorganiser.api.CallManager;
 import mitchell.dnd.dndzombieorganiser.data.builders.WeaponBuilder;
@@ -9,10 +10,12 @@ import mitchell.dnd.dndzombieorganiser.data.dto.ArmourDTO;
 import mitchell.dnd.dndzombieorganiser.data.dto.DataDTO;
 import mitchell.dnd.dndzombieorganiser.data.dto.RaceDTO;
 import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Pair;
 import mitchell.dnd.dndzombieorganiser.data.properties.Rules;
 import mitchell.dnd.dndzombieorganiser.data.pojo.Ability;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class Helper {
@@ -133,5 +136,18 @@ public class Helper {
                 zombie.setSpeed(zombie.getSpeed() - 5);
             }
         }
+    }
+
+    public static String attack(List<ZombieWrapper> selection, String attackType, Constants.RollType r, DataDTO data) {
+        StringBuilder sb = new StringBuilder();
+        List<ZombieDTO> selectedZombies = selection.stream().map(ZombieWrapper::getZombie).filter(z -> z.getWeapon(attackType) != null).toList();
+        List<Pair> attacks = selectedZombies.stream().map(z -> z.getWeapon(attackType).attack(data.getDiceRoller(), r)).toList();
+        for (int i = 0; i < attacks.size(); i++) {
+            sb.append("Zombie ").append(selectedZombies.get(i).getId())
+                    .append(" to Hit: ").append(attacks.get(i).getA())
+                    .append(" for Damage of: ").append(attacks.get(i).getB())
+                    .append("\n");
+        }
+        return sb.toString();
     }
 }

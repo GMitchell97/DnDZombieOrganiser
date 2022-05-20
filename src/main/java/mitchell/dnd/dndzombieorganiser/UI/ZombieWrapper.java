@@ -41,6 +41,10 @@ public class ZombieWrapper {
         charisma = new SimpleStringProperty(getCharisma());
     }
 
+    public ZombieDTO getZombie() {
+        return zombie;
+    }
+
     public String getAC() {
         return zombie.getAc() + " (" + zombie.getArmour() + ")";
     }

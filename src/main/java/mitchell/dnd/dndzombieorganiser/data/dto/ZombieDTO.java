@@ -120,8 +120,8 @@ public class ZombieDTO {
     }
 
     @JsonIgnore
-    public Pair makeWeaponAttack(String weaponSlot, DiceRoller dice) {
-        return Objects.requireNonNull(getWeapons().get(weaponSlot)).attack(dice);
+    public Pair makeWeaponAttack(String weaponSlot, DiceRoller dice, Constants.RollType r) {
+        return Objects.requireNonNull(getWeapons().get(weaponSlot)).attack(dice, r);
     }
 
     @JsonProperty("ID")

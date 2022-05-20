@@ -14,11 +14,14 @@ public class WeaponBuilder {
         Weapon weapon = new Weapon();
 
         String damageDice = weaponJson.get("damage").get("damage_dice").asText();
-        weapon.setDamage(Integer.parseInt(damageDice.split("d")[1]));
+        weapon.setDamageDie(Integer.parseInt(damageDice.split("d")[1]));
+        weapon.setDamageDieAmount(Integer.parseInt(damageDice.split("d")[0]));
 
         List<String> props = new ArrayList<>();
-        for (JsonNode property : weaponJson.get("properties")) {
-            props.add(property.get("index").asText());
+        if (weaponJson.has("properties")) {
+            for (JsonNode property : weaponJson.get("properties")) {
+                props.add(property.get("index").asText());
+            }
         }
 
         weapon.setProperties(props);
