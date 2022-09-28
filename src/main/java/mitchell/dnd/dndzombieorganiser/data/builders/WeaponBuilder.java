@@ -30,6 +30,19 @@ public class WeaponBuilder {
         return weapon;
     }
 
+    public static Weapon createDefaultWeapon() {
+        Weapon weapon = new Weapon();
+
+        weapon.setDamageDie(6);
+        weapon.setDamageDieAmount(1);
+        weapon.setDamageBonus(1);
+        weapon.setAttackBonus(2);
+
+        weapon.setName("Slam");
+
+        return weapon;
+    }
+
     public static void configWeapon(Weapon weapon, ZombieDTO zombie) {
         int modifier;
         if (weapon.getProperties().contains("finesse")) {
@@ -40,11 +53,11 @@ public class WeaponBuilder {
 
         Rules rules = new Rules();
         if (rules.ownerHasUndeadThralls()) {
-            weapon.setDamageBonus(modifier + rules.getOwnerProficiency());
+            weapon.setDamageBonus(modifier + rules.getOwnerProficiency() + weapon.getDamageBonus());
         } else {
-            weapon.setDamageBonus(modifier);
+            weapon.setDamageBonus(modifier + weapon.getDamageBonus());
         }
-        weapon.setAttackBonus(modifier);
+        weapon.setAttackBonus(modifier + weapon.getAttackBonus());
     }
 
     public static void configWeapon(String weapon, ZombieDTO zombie) {

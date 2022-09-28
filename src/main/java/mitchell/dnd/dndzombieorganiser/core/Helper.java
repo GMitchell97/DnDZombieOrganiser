@@ -81,6 +81,9 @@ public class Helper {
             callManager = getEquipment(args.get("melee"));
             newZombie.addWeapon("melee", WeaponBuilder.createWeapon(callManager.getJson().orElseThrow()));
             WeaponBuilder.configWeapon("melee", newZombie);
+        } else {
+            newZombie.addWeapon("melee", WeaponBuilder.createDefaultWeapon());
+            WeaponBuilder.configWeapon("melee", newZombie);
         }
 
         if (args.containsKey("ranged")) {

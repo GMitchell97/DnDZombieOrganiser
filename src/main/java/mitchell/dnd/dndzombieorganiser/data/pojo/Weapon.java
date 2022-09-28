@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import mitchell.dnd.dndzombieorganiser.Constants;
 import mitchell.dnd.dndzombieorganiser.core.DiceRoller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Weapon {
@@ -74,7 +75,7 @@ public class Weapon {
 
     @JsonProperty("Properties")
     public List<String> getProperties() {
-        return properties;
+        return properties != null ? properties : new ArrayList<>();
     }
 
     @JsonProperty("Properties")
