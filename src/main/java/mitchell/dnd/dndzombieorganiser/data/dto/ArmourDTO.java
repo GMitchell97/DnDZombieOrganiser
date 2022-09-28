@@ -33,4 +33,8 @@ public class ArmourDTO {
     public boolean isStealthDisadvantage() {
         return json.get("stealth_disadvantage").asBoolean();
     }
+
+    public boolean isHeavy() {
+        return json.get("armor_category").asText().equals("Heavy");
+    }
 }

@@ -2,6 +2,7 @@ package mitchell.dnd.dndzombieorganiser.UI;
 
 import javafx.beans.property.SimpleStringProperty;
 import mitchell.dnd.dndzombieorganiser.data.dto.ZombieDTO;
+import mitchell.dnd.dndzombieorganiser.data.pojo.Weapon;
 
 public class ZombieWrapper {
 
@@ -9,6 +10,8 @@ public class ZombieWrapper {
     private SimpleStringProperty Name;
     private SimpleStringProperty AC;
     private SimpleStringProperty HP;
+    private SimpleStringProperty speed;
+    private SimpleStringProperty attack;
     private SimpleStringProperty strength;
     private SimpleStringProperty dexterity;
     private SimpleStringProperty constitution;
@@ -28,6 +31,8 @@ public class ZombieWrapper {
         Name = new SimpleStringProperty(getName());
         AC = new SimpleStringProperty(getAC());
         HP = new SimpleStringProperty(getHP());
+        speed = new SimpleStringProperty(getSpeed());
+        attack = new SimpleStringProperty(getAttack());
         strength = new SimpleStringProperty(getStrength());
         dexterity = new SimpleStringProperty(getDexterity());
         constitution = new SimpleStringProperty(getConstitution());
@@ -36,8 +41,12 @@ public class ZombieWrapper {
         charisma = new SimpleStringProperty(getCharisma());
     }
 
+    public ZombieDTO getZombie() {
+        return zombie;
+    }
+
     public String getAC() {
-        return zombie.getAc();
+        return zombie.getAc() + " (" + zombie.getArmour() + ")";
     }
 
     public SimpleStringProperty ACProperty() {
@@ -155,4 +164,25 @@ public class ZombieWrapper {
     public void setCharisma(String charisma) {
         zombie.setAbilityScore("charisma", Integer.parseInt(charisma));
     }
+
+    public String getSpeed() {
+        return zombie.getSpeed() + "ft";
+    }
+
+    public SimpleStringProperty speedProperty() {
+        return speed;
+    }
+
+    public String getAttack() {
+        StringBuilder weapons = new StringBuilder();
+        for (Weapon weapon : zombie.getWeapons().values()) {
+            weapons.append(weapon.toString()).append("\n");
+        }
+        return weapons.toString();
+    }
+
+    public SimpleStringProperty meleeAttackProperty() {
+        return attack;
+    }
+
 }

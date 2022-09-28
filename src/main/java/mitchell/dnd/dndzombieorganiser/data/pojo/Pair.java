@@ -2,13 +2,15 @@ package mitchell.dnd.dndzombieorganiser.data.pojo;
 
 public class Pair {
 
-    private final int A;
-    private final int B;
+    private int A;
+    private int B;
 
     public Pair(int a, int b) {
         A = a;
         B = b;
     }
+
+    public Pair() {}
 
     public int getA() {
         return A;
@@ -16,5 +18,13 @@ public class Pair {
 
     public int getB() {
         return B;
+    }
+
+    public void setA(int a) {
+        A = a;
+    }
+
+    public void setB(int b) {
+        B = b;
     }
 }

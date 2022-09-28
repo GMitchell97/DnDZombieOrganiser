@@ -39,6 +39,8 @@ public class ZombieDTO {
     private String armour;
     @JsonProperty("Weapons")
     private Map<String,Weapon> weapons;
+    @JsonProperty("Speed")
+    private int speed;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -102,6 +104,11 @@ public class ZombieDTO {
         return weapons;
     }
 
+    @JsonIgnore
+    public Weapon getWeapon(String weaponSlot) {
+        return getWeapons().get(weaponSlot);
+    }
+
     @JsonProperty("Weapons")
     public void setWeapons(Map<String, Weapon> weapons) {
         this.weapons = weapons;
@@ -113,8 +120,8 @@ public class ZombieDTO {
     }
 
     @JsonIgnore
-    public Pair makeWeaponAttack(String weaponSlot, DiceRoller dice) {
-        return Objects.requireNonNull(getWeapons().get(weaponSlot)).attack(dice);
+    public Pair makeWeaponAttack(String weaponSlot, DiceRoller dice, Constants.RollType r) {
+        return Objects.requireNonNull(getWeapons().get(weaponSlot)).attack(dice, r);
     }
 
     @JsonProperty("ID")
@@ -160,6 +167,16 @@ public class ZombieDTO {
     @JsonProperty("AC")
     public void setAc(int ac) {
         this.ac = Integer.toString(ac);
+    }
+
+    @JsonProperty("Speed")
+    public int getSpeed() {
+        return speed;
+    }
+
+    @JsonProperty("Speed")
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     @JsonAnyGetter

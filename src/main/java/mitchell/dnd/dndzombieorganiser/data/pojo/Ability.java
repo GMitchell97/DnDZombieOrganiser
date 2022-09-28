@@ -15,6 +15,8 @@ public class Ability {
         this.name = name;
     }
 
+    public Ability() {}
+
     @JsonProperty("value")
     public int getValue() {
         return value;
