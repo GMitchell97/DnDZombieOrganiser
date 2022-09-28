@@ -35,7 +35,6 @@ public class WeaponBuilder {
 
         weapon.setDamageDie(6);
         weapon.setDamageDieAmount(1);
-        weapon.setDamageBonus(1);
         weapon.setAttackBonus(2);
 
         weapon.setName("Slam");
@@ -43,7 +42,7 @@ public class WeaponBuilder {
         return weapon;
     }
 
-    public static void configWeapon(Weapon weapon, ZombieDTO zombie) {
+    public static void configWeapon(Weapon weapon, ZombieDTO zombie, Rules rules) {
         int modifier;
         if (weapon.getProperties().contains("finesse")) {
             modifier = zombie.getAbilityScoreModifier(getBetterFinesseAbility(zombie));
@@ -51,7 +50,6 @@ public class WeaponBuilder {
             modifier = zombie.getAbilityScoreModifier("strength");
         }
 
-        Rules rules = new Rules();
         if (rules.ownerHasUndeadThralls()) {
             weapon.setDamageBonus(modifier + rules.getOwnerProficiency() + weapon.getDamageBonus());
         } else {
@@ -60,8 +58,8 @@ public class WeaponBuilder {
         weapon.setAttackBonus(modifier + weapon.getAttackBonus());
     }
 
-    public static void configWeapon(String weapon, ZombieDTO zombie) {
-        configWeapon(zombie.getWeapon(weapon), zombie);
+    public static void configWeapon(String weapon, ZombieDTO zombie, Rules rules) {
+        configWeapon(zombie.getWeapon(weapon), zombie, rules);
     }
 
     public static String getBetterFinesseAbility(ZombieDTO zombie) {

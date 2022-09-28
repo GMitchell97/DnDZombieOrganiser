@@ -60,6 +60,7 @@ public class Helper {
 
     public static void addZombie(DataDTO data, Map<String, String> args) {
         ZombieDTO newZombie = new ZombieDTO();
+        Rules rules = new Rules();
 
         CallManager callManager = getCreatureRace(args.get("race"));
         RaceDTO raceDTO = new RaceDTO(callManager.getJson().orElseThrow());
@@ -80,16 +81,16 @@ public class Helper {
         if (args.containsKey("melee")) {
             callManager = getEquipment(args.get("melee"));
             newZombie.addWeapon("melee", WeaponBuilder.createWeapon(callManager.getJson().orElseThrow()));
-            WeaponBuilder.configWeapon("melee", newZombie);
+            WeaponBuilder.configWeapon("melee", newZombie, rules);
         } else {
             newZombie.addWeapon("melee", WeaponBuilder.createDefaultWeapon());
-            WeaponBuilder.configWeapon("melee", newZombie);
+            WeaponBuilder.configWeapon("melee", newZombie, rules);
         }
 
         if (args.containsKey("ranged")) {
             callManager = getEquipment(args.get("ranged"));
             newZombie.addWeapon("ranged", WeaponBuilder.createWeapon(callManager.getJson().orElseThrow()));
-            WeaponBuilder.configWeapon("ranged", newZombie);
+            WeaponBuilder.configWeapon("ranged", newZombie, rules);
         }
 
         data.addZombie(newZombie);
